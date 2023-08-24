@@ -39,8 +39,13 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.addIndex("Jabatans", ["id_jabatan"], {
+      unique: true,
+      name: "idx_id_jabatan",
+    });
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeIndex("Jabatans", "idx_id_jabatan");
     await queryInterface.dropTable("Jabatans");
     // Menghapus fungsi id_jabatan
     await queryInterface.sequelize.query(`
